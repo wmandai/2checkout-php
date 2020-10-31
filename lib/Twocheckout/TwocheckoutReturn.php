@@ -1,9 +1,13 @@
 <?php
+namespace Twocheckout\Twocheckout;
 
-class Twocheckout_Return extends Twocheckout
+use Twocheckout\Twocheckout;
+use Twocheckout\Twocheckout\Api\TwocheckoutUtil;
+
+class TwocheckoutReturn extends Twocheckout
 {
 
-    public static function check($params=array(), $secretWord)
+    public static function check($params = array(), $secretWord)
     {
         $hashSecretWord = $secretWord;
         $hashSid = $params['sid'];
@@ -11,11 +15,11 @@ class Twocheckout_Return extends Twocheckout
         $hashOrder = $params['order_number'];
         $StringToHash = strtoupper(md5($hashSecretWord . $hashSid . $hashOrder . $hashTotal));
         if ($StringToHash != $params['key']) {
-            $result = Twocheckout_Message::message('Fail', 'Hash Mismatch');
+            $result = TwocheckoutMessage::message('Fail', 'Hash Mismatch');
         } else {
-            $result = Twocheckout_Message::message('Success', 'Hash Matched');
+            $result = TwocheckoutMessage::message('Success', 'Hash Matched');
         }
-        return Twocheckout_Util::returnResponse($result);
+        return TwocheckoutUtil::returnResponse($result);
     }
 
 }

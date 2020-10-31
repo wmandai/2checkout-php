@@ -1,6 +1,9 @@
 <?php
+namespace Twocheckout\Tests;
 
-require_once(dirname(__FILE__) . '/../lib/Twocheckout.php');
+use Twocheckout\Twocheckout;
+use Twocheckout\Twocheckout\Api\TwocheckoutError;
+use Twocheckout\Twocheckout\TwocheckoutCharge;
 
 class TestCharge extends PHPUnit_Framework_TestCase
 {
@@ -11,9 +14,9 @@ class TestCharge extends PHPUnit_Framework_TestCase
             'sid' => 'your seller id',
             'mode' => '2CO',
             'li_0_name' => 'Test Product',
-            'li_0_price' => '0.01'
+            'li_0_price' => '0.01',
         );
-        Twocheckout_Charge::form($params, "Click Here!");
+        TwocheckoutCharge::form($params, "Click Here!");
     }
 
     public function testChargeFormAuto()
@@ -22,9 +25,9 @@ class TestCharge extends PHPUnit_Framework_TestCase
             'sid' => 'your seller id',
             'mode' => '2CO',
             'li_0_name' => 'Test Product',
-            'li_0_price' => '0.01'
+            'li_0_price' => '0.01',
         );
-        Twocheckout_Charge::form($params, 'auto');
+        TwocheckoutCharge::form($params, 'auto');
     }
 
     public function testDirect()
@@ -40,9 +43,9 @@ class TestCharge extends PHPUnit_Framework_TestCase
             'city' => 'Columbus',
             'state' => 'Ohio',
             'zip' => '43123',
-            'country' => 'USA'
+            'country' => 'USA',
         );
-        Twocheckout_Charge::direct($params, "Click Here!");
+        TwocheckoutCharge::direct($params, "Click Here!");
     }
 
     public function testDirectAuto()
@@ -58,9 +61,9 @@ class TestCharge extends PHPUnit_Framework_TestCase
             'city' => 'Columbus',
             'state' => 'Ohio',
             'zip' => '43123',
-            'country' => 'USA'
+            'country' => 'USA',
         );
-        Twocheckout_Charge::direct($params, 'auto');
+        TwocheckoutCharge::direct($params, 'auto');
     }
 
     public function testChargeLink()
@@ -69,9 +72,9 @@ class TestCharge extends PHPUnit_Framework_TestCase
             'sid' => 'your seller id',
             'mode' => '2CO',
             'li_0_name' => 'Test Product',
-            'li_0_price' => '0.01'
+            'li_0_price' => '0.01',
         );
-        Twocheckout_Charge::link($params);
+        TwocheckoutCharge::link($params);
     }
 
     public function testChargeAuth()
@@ -80,9 +83,9 @@ class TestCharge extends PHPUnit_Framework_TestCase
         Twocheckout::sellerId('your seller id');
 
         try {
-            $charge = Twocheckout_Charge::auth(array(
+            $charge = TwocheckoutCharge::auth(array(
                 "sellerId" => "your seller id",
-                "demo" =>true,
+                "demo" => true,
                 "merchantOrderId" => "123",
                 "token" => 'MDY3OTMwMWUtODg5NS00NmFmLWJhNjgtYjMxYTI1ZjhkOWU3',
                 "currency" => 'USD',
@@ -95,7 +98,7 @@ class TestCharge extends PHPUnit_Framework_TestCase
                     "zipCode" => '43123',
                     "country" => 'USA',
                     "email" => 'testingtester@2co.com',
-                    "phoneNumber" => '555-555-5555'
+                    "phoneNumber" => '555-555-5555',
                 ),
                 "shippingAddr" => array(
                     "name" => 'John Doe',
@@ -105,11 +108,11 @@ class TestCharge extends PHPUnit_Framework_TestCase
                     "zipCode" => '43123',
                     "country" => 'USA',
                     "email" => 'testingtester@2co.com',
-                    "phoneNumber" => '555-555-5555'
-                )
+                    "phoneNumber" => '555-555-5555',
+                ),
             ));
             $this->assertSame('APPROVED', $charge['response']['responseCode']);
-        } catch (Twocheckout_Error $e) {
+        } catch (TwocheckoutError $e) {
             $this->assertSame('Bad request - parameter error', $e->getMessage());
         }
     }

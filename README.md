@@ -66,7 +66,7 @@ Twocheckout::privateKey('BE632CB0-BB29-11E3-AFB6-D99C28100996');
 Twocheckout::sellerId('901248204');
 
 try {
-    $charge = Twocheckout_Charge::auth(array(
+    $charge = TwocheckoutCharge::auth(array(
         "sellerId" => "901248204",
         "merchantOrderId" => "123",
         "token" => 'MjFiYzIzYjAtYjE4YS00ZmI0LTg4YzYtNDIzMTBlMjc0MDlk',
@@ -94,7 +94,7 @@ try {
         )
     ));
     $this->assertEquals('APPROVED', $charge['response']['responseCode']);
-} catch (Twocheckout_Error $e) {
+} catch (TwocheckoutError $e) {
     $this->assertEquals('Unauthorized', $e->getMessage());
 }
 ```
@@ -188,8 +188,8 @@ $args = array(
     'sale_id' => 4834917619
 );
 try {
-    $result = Twocheckout_Sale::stop($args);
-} catch (Twocheckout_Error $e) {
+    $result = TwocheckoutSale::stop($args);
+} catch (TwocheckoutError $e) {
     $e->getMessage();
 }
 ```
@@ -221,7 +221,7 @@ $params = array(
     'li_0_name' => 'Test Product',
     'li_0_price' => '0.01'
 );
-Twocheckout_Charge::form($params, 'auto');
+TwocheckoutCharge::form($params, 'auto');
 ```
 
 *Example Response:*
@@ -247,7 +247,7 @@ $params = array();
 foreach ($_REQUEST as $k => $v) {
     $params[$k] = $v;
 }
-$passback = Twocheckout_Return::check($params, "tango");
+$passback = TwocheckoutReturn::check($params, "tango");
 ```
 
 *Example Response:*
@@ -271,7 +271,7 @@ $params = array();
 foreach ($_POST as $k => $v) {
     $params[$k] = $v;
 }
-$passback = Twocheckout_Notification::check($params, "tango");
+$passback = TwocheckoutNotification::check($params, "tango");
 ```
 
 *Example Response:*
@@ -285,7 +285,7 @@ $passback = Twocheckout_Notification::check($params, "tango");
 
 Exceptions:
 -----------
-Twocheckout_Error exceptions are thrown by if an error has returned. It is best to catch these exceptions so that they can be gracefully handled in your application.
+TwocheckoutError exceptions are thrown by if an error has returned. It is best to catch these exceptions so that they can be gracefully handled in your application.
 
 *Example Usage*
 
@@ -301,8 +301,8 @@ $params = array(
     'comment' => 'Order never sent.'
 );
 try {
-    $sale = Twocheckout_Sale::refund($params);
-} catch (Twocheckout_Error $e) {
+    $sale = TwocheckoutSale::refund($params);
+} catch (TwocheckoutError $e) {
     $e->getMessage();
 }
 ```

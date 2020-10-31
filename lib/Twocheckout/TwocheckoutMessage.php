@@ -1,6 +1,7 @@
 <?php
+namespace Twocheckout\Twocheckout;
 
-class Twocheckout_Message
+class TwocheckoutMessage
 {
     public static function message($code, $message)
     {

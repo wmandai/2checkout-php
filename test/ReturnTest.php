@@ -1,6 +1,7 @@
 <?php
+namespace Twocheckout\Tests;
 
-require_once(dirname(__FILE__) . '/../lib/Twocheckout.php');
+use Twocheckout\Twocheckout\TwocheckoutReturn;
 
 class TestReturn extends PHPUnit_Framework_TestCase
 {
@@ -11,9 +12,9 @@ class TestReturn extends PHPUnit_Framework_TestCase
             'sid' => '1817037',
             'key' => '7AB926D469648F3305AE361D5BD2C3CB',
             'total' => '0.01',
-            'order_number' => '4774380224'
+            'order_number' => '4774380224',
         );
-        $result = Twocheckout_Return::check($params, 'tango');
+        $result = TwocheckoutReturn::check($params, 'tango');
         $this->assertSame("Success", $result['response_code']);
     }
 

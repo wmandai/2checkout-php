@@ -1,6 +1,7 @@
 <?php
+namespace Twocheckout\Tests;
 
-require_once(dirname(__FILE__) . '/../lib/Twocheckout.php');
+use Twocheckout\Twocheckout;
 
 class TestNotification extends PHPUnit_Framework_TestCase
 {
@@ -12,9 +13,9 @@ class TestNotification extends PHPUnit_Framework_TestCase
             'sale_id' => '4774380224',
             'invoice_id' => '4774380233',
             'md5_hash' => '566C45D68B75357AD43F9010CFFE8CF5',
-            'secret' => 'tango'
+            'secret' => 'tango',
         );
-        $result = Twocheckout_Notification::check($params, 'tango');
+        $result = TwocheckoutNotification::check($params, 'tango');
         $this->assertSame("Success", $result['response_code']);
     }
 

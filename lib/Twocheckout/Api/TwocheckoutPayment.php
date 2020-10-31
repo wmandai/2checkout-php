@@ -1,23 +1,26 @@
 <?php
+namespace Twocheckout\Twocheckout\Api;
 
-class Twocheckout_Payment extends Twocheckout
+use Twocheckout\Twocheckout;
+
+class TwocheckoutPayment extends Twocheckout
 {
 
     public static function retrieve()
     {
-        $request = new Twocheckout_Api_Requester();
+        $request = new TwocheckoutApi();
         $urlSuffix = '/api/acct/list_payments';
         $result = $request->doCall($urlSuffix);
-        $response = Twocheckout_Util::returnResponse($result);
+        $response = TwocheckoutUtil::returnResponse($result);
         return $response;
     }
 
     public static function pending()
     {
-        $request = new Twocheckout_Api_Requester();
+        $request = new TwocheckoutApi();
         $urlSuffix = '/api/acct/detail_pending_payment';
         $result = $request->doCall($urlSuffix);
-        $response = Twocheckout_Util::returnResponse($result);
+        $response = TwocheckoutUtil::returnResponse($result);
         return $response;
     }
 

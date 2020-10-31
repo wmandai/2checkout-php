@@ -1,42 +1,45 @@
 <?php
+namespace Twocheckout\Twocheckout\Api;
 
-class Twocheckout_Product extends Twocheckout
+use Twocheckout\Twocheckout;
+
+class TwocheckoutProduct extends Twocheckout
 {
 
-    public static function create($params=array())
+    public static function create($params = array())
     {
-        $request = new Twocheckout_Api_Requester();
+        $request = new TwocheckoutApi();
         $urlSuffix = '/api/products/create_product';
         $result = $request->doCall($urlSuffix, $params);
-        return Twocheckout_Util::returnResponse($result);
+        return TwocheckoutUtil::returnResponse($result);
     }
 
-    public static function retrieve($params=array())
+    public static function retrieve($params = array())
     {
-        $request = new Twocheckout_Api_Requester();
-        if(array_key_exists("product_id",$params)) {
+        $request = new TwocheckoutApi();
+        if (array_key_exists("product_id", $params)) {
             $urlSuffix = '/api/products/detail_product';
         } else {
             $urlSuffix = '/api/products/list_products';
         }
         $result = $request->doCall($urlSuffix, $params);
-        return Twocheckout_Util::returnResponse($result);
+        return TwocheckoutUtil::returnResponse($result);
     }
 
-    public static function update($params=array())
+    public static function update($params = array())
     {
-        $request = new Twocheckout_Api_Requester();
+        $request = new TwocheckoutApi();
         $urlSuffix = '/api/products/update_product';
         $result = $request->doCall($urlSuffix, $params);
-        return Twocheckout_Util::returnResponse($result);
+        return TwocheckoutUtil::returnResponse($result);
     }
 
-    public static function delete($params=array())
+    public static function delete($params = array())
     {
-        $request = new Twocheckout_Api_Requester();
+        $request = new TwocheckoutApi();
         $urlSuffix = '/api/products/delete_product';
         $result = $request->doCall($urlSuffix, $params);
-        return Twocheckout_Util::returnResponse($result);
+        return TwocheckoutUtil::returnResponse($result);
     }
 
 }

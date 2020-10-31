@@ -1,9 +1,13 @@
 <?php
+namespace Twocheckout\Twocheckout\Api;
 
-class Twocheckout_Util extends Twocheckout
+use Twocheckout\Twocheckout;
+
+class TwocheckoutUtil extends Twocheckout
 {
 
-    static function returnResponse($contents, $format=null) {
+    public static function returnResponse($contents, $format = null)
+    {
         $format = $format == null ? Twocheckout::$format : $format;
         switch ($format) {
             case "array":
@@ -25,10 +29,9 @@ class Twocheckout_Util extends Twocheckout
     public static function objectToArray($object)
     {
         $object = json_decode($object, true);
-        $array=array();
-        foreach($object as $member=>$data)
-        {
-            $array[$member]=$data;
+        $array = array();
+        foreach ($object as $member => $data) {
+            $array[$member] = $data;
         }
         return $array;
     }
@@ -38,7 +41,8 @@ class Twocheckout_Util extends Twocheckout
         return json_encode($object);
     }
 
-    public static function getRecurringLineitems($saleDetail) {
+    public static function getRecurringLineitems($saleDetail)
+    {
         $i = 0;
         $invoiceData = array();
 
@@ -65,9 +69,9 @@ class Twocheckout_Util extends Twocheckout
     public static function checkError($contents)
     {
         if (isset($contents['errors'])) {
-            throw new Twocheckout_Error($contents['errors'][0]['message']);
+            throw new TwocheckoutError($contents['errors'][0]['message']);
         } elseif (isset($contents['exception'])) {
-            throw new Twocheckout_Error($contents['exception']['errorMsg'], $contents['exception']['errorCode']);
+            throw new TwocheckoutError($contents['exception']['errorMsg'], $contents['exception']['errorCode']);
         }
     }
 

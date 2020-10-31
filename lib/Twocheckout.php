@@ -1,5 +1,7 @@
 <?php
 
+namespace Twocheckout;
+
 abstract class Twocheckout
 {
     public static $sid;
@@ -12,23 +14,28 @@ abstract class Twocheckout
     public static $format = 'array';
     const VERSION = '0.4.0';
 
-    public static function sellerId($value = null) {
+    public static function sellerId($value = null)
+    {
         self::$sid = $value;
     }
 
-    public static function privateKey($value = null) {
+    public static function privateKey($value = null)
+    {
         self::$privateKey = $value;
     }
 
-    public static function username($value = null) {
+    public static function username($value = null)
+    {
         self::$username = $value;
     }
 
-    public static function password($value = null) {
+    public static function password($value = null)
+    {
         self::$password = $value;
     }
 
-    public static function verifySSL($value = null) {
+    public static function verifySSL($value = null)
+    {
         if ($value == 0 || $value == false) {
             self::$verifySSL = false;
         } else {
@@ -36,19 +43,8 @@ abstract class Twocheckout
         }
     }
 
-    public static function format($value = null) {
+    public static function format($value = null)
+    {
         self::$format = $value;
     }
 }
-
-require(dirname(__FILE__) . '/Twocheckout/Api/TwocheckoutAccount.php');
-require(dirname(__FILE__) . '/Twocheckout/Api/TwocheckoutPayment.php');
-require(dirname(__FILE__) . '/Twocheckout/Api/TwocheckoutApi.php');
-require(dirname(__FILE__) . '/Twocheckout/Api/TwocheckoutSale.php');
-require(dirname(__FILE__) . '/Twocheckout/Api/TwocheckoutProduct.php');
-require(dirname(__FILE__) . '/Twocheckout/Api/TwocheckoutUtil.php');
-require(dirname(__FILE__) . '/Twocheckout/Api/TwocheckoutError.php');
-require(dirname(__FILE__) . '/Twocheckout/TwocheckoutReturn.php');
-require(dirname(__FILE__) . '/Twocheckout/TwocheckoutNotification.php');
-require(dirname(__FILE__) . '/Twocheckout/TwocheckoutCharge.php');
-require(dirname(__FILE__) . '/Twocheckout/TwocheckoutMessage.php');

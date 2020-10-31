@@ -1,6 +1,9 @@
 <?php
+namespace Twocheckout\Twocheckout\Api;
 
-class Twocheckout_Api_Requester
+use Twocheckout\Twocheckout;
+
+class TwocheckoutApi
 {
     public $baseUrl;
     public $environment;
@@ -9,7 +12,8 @@ class Twocheckout_Api_Requester
     private $sid;
     private $privateKey;
 
-	function __construct() {
+    public function __construct()
+    {
         $this->user = Twocheckout::$username;
         $this->pass = Twocheckout::$password;
         $this->sid = Twocheckout::$sid;
@@ -18,16 +22,16 @@ class Twocheckout_Api_Requester
         $this->privateKey = Twocheckout::$privateKey;
     }
 
-	function doCall($urlSuffix, $data=array())
+    public function doCall($urlSuffix, $data = array())
     {
         $url = $this->baseUrl . $urlSuffix;
         $ch = curl_init($url);
         if (isset($data['api'])) {
-            unset( $data['api'] );
+            unset($data['api']);
             $data['privateKey'] = $this->privateKey;
             $data['sellerId'] = $this->sid;
             $data = json_encode($data);
-            $header = array("content-type:application/json","content-length:".strlen($data));
+            $header = array("content-type:application/json", "content-length:" . strlen($data));
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         } else {
             $header = array("Accept: application/json");
@@ -45,11 +49,11 @@ class Twocheckout_Api_Requester
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         $resp = curl_exec($ch);
         curl_close($ch);
-        if ($resp === FALSE) {
-            throw new Twocheckout_Error("cURL call failed", "403");
+        if ($resp === false) {
+            throw new TwocheckoutError("cURL call failed", "403");
         } else {
             return utf8_encode($resp);
         }
-	}
+    }
 
 }

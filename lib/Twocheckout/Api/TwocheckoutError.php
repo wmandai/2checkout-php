@@ -1,6 +1,7 @@
 <?php
+namespace Twocheckout\Twocheckout\Api;
 
-class Twocheckout_Error extends Exception
+class TwocheckoutError extends Exception
 {
     public function __construct($message, $code = 0)
     {
